@@ -188,17 +188,17 @@ function ParseEntryTable()
 {
   // TODO: Add Parsing Logic
   entries = [
-    {entryType:"Holiday", startDateTime: new Date(2017,11,25,8,0),
+    {entryType:"LH", startDateTime: new Date(2017,11,25,8,0),
       endDateTime: new Date(2017,11,25,17,0), duration: 8, other: "Automatic Holiday"},
-    {entryType:"CreditEarned", startDateTime: new Date(2017,11,26,7,15),
+    {entryType:"CD", startDateTime: new Date(2017,11,26,7,15),
       endDateTime: new Date(2017,11,26,8,0), duration: 0.75, other: "Project Rivendale"},
-    {entryType:"Regular", startDateTime: new Date(2017,11,26,8,0),
+    {entryType:"RG", startDateTime: new Date(2017,11,26,8,0),
       endDateTime: new Date(2017,11,26,13,0), duration: 4, other: "Project Durmstrang"},
-    {entryType:"Regular", startDateTime: new Date(2017,11,26,13,0),
+    {entryType:"RG", startDateTime: new Date(2017,11,26,13,0),
       endDateTime: new Date(2017,11,26,13,30), duration: 0.5, other: "Project Camino"},
-    {entryType:"CreditUsed", startDateTime: new Date(2017,11,26,13,30),
+    {entryType:"CN", startDateTime: new Date(2017,11,26,13,30),
       endDateTime: new Date(2017,11,26,17,0), duration: 3.5, other: "Credit Hours Used"},
-    {entryType:"Holiday", startDateTime: new Date(2018,0,1,8,0),
+    {entryType:"LH", startDateTime: new Date(2018,0,1,8,0),
       endDateTime: new Date(2018,0,1,17,0), duration: 8, other: "Automatic Holiday"}
   ];
   DrawPlanner(entries);

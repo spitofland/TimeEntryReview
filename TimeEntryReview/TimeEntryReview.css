@@ -1,16 +1,16 @@
-.Regular      {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #66bb99;}
-.Annual       {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ccffcc;}
-.Sick         {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ffff99;}
-.CreditEarned {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ccffff;}
-.CreditUsed   {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #99ccff;}
-.CompEarned   {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #00ccff;}
-.CompUsed     {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #0066cc; color: white;}
-.TravelEarned {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ccccff;}
-.TravelUsed   {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #cc99ff;}
-.Overtime     {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ff7c80;}
-.AwardUsed    {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #00bb50;}
-.AdminLeave   {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ff6600;}
-.Holiday      {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #444444; color: white;}
+.RG {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #66bb99;} /* Normal Time Worked */
+.LA {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ccffcc;} /* Annual Leave */
+.SL {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ffff99;} /* Sick Leave */
+.CD {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ccffff;} /* Credit Hours Earned */
+.CN {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #99ccff;} /* Credit Hours Used */
+.CE {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #00ccff;} /* Comp Hours Earned */
+.CT {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #0066cc; color: white;} /* Comp Hours Used */
+.CB {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ccccff;} /* Travel Comp Hours Earned */
+.CF {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #cc99ff;} /* Travel Comp Hours Used */
+.OT {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ff7c80;} /* Overtime Worked */
+.CB {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #00bb50;} /* Award Leave */
+.LN {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ff6600;} /* Administrative Leave */
+.LH {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #444444; color: white;} /* Holiday Leave */
 
 #Planner {
   width:100%;
