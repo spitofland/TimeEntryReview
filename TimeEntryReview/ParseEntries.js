@@ -3,6 +3,7 @@ function ParseEntries(textDump)
   // Get each line and call ParseEntry on that line
   var lines = textDump.split("\n");
   //var lines = textDump.match(/[^\n]*/g);  // Regex form
+  
   return lines.reduce( function (entries, line) {
     var entry = ParseEntry(line);
     if( entry != undefined )
