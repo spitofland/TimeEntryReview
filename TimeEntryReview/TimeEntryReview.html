@@ -10,8 +10,15 @@
 </head>
 
 <body onload="ParseEntryTable()">
-<textarea autofocus placeholder="Paste Time Entry Listing Here..."></textarea>
-<button type="button" onclick="ParseEntryTable">Draw Entries</button>
+<textarea id="EntryText" autofocus placeholder="Paste Time Entry Listing Here...">
+LH Dec 25, 2017 08:00 Dec 25, 2017 17:00 8.00 Automatic Holiday
+CD Dec 26, 2017 07:15 Dec 26, 2017 08:00 0.75 Project Rivendale
+RG Dec 26, 2017 08:00 Dec 26, 2017 13:00 4.00 Project Durmstrang
+RG Dec 26, 2017 13:00 Dec 26, 2017 13:30 0.50 Project Camino
+CN Dec 26, 2017 13:30 Dec 26, 2017 17:00 3.50 Credit Hours Used
+LH Jan 01, 2018 08:00 Jan 01, 2017 17:00 8.00 Automatic Holiday
+</textarea>
+<button type="button" onclick="ParseEntryTable()">Draw Entries</button>
 <div id="Planner">
 </div>
 </body>

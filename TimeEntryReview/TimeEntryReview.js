@@ -168,6 +168,7 @@ function GetEntriesForWeek(entries,weekDate)
 
 function DrawPlanner(entries)
 {
+  document.getElementById("Planner").innerHTML = "";
   entries.sort( function (entry1,entry2) { return entry1.startDateTime - entry2.startDateTime; });
   var startDate = RoundDownToDate(entries[0].startDateTime);
   var endDate = RoundDownToDate(entries[entries.length-1].startDateTime);
@@ -186,20 +187,6 @@ function DrawPlanner(entries)
 
 function ParseEntryTable()
 {
-  // TODO: Add Parsing Logic
-  entries = [
-    {entryType:"LH", startDateTime: new Date(2017,11,25,8,0),
-      endDateTime: new Date(2017,11,25,17,0), duration: 8, other: "Automatic Holiday"},
-    {entryType:"CD", startDateTime: new Date(2017,11,26,7,15),
-      endDateTime: new Date(2017,11,26,8,0), duration: 0.75, other: "Project Rivendale"},
-    {entryType:"RG", startDateTime: new Date(2017,11,26,8,0),
-      endDateTime: new Date(2017,11,26,13,0), duration: 4, other: "Project Durmstrang"},
-    {entryType:"RG", startDateTime: new Date(2017,11,26,13,0),
-      endDateTime: new Date(2017,11,26,13,30), duration: 0.5, other: "Project Camino"},
-    {entryType:"CN", startDateTime: new Date(2017,11,26,13,30),
-      endDateTime: new Date(2017,11,26,17,0), duration: 3.5, other: "Credit Hours Used"},
-    {entryType:"LH", startDateTime: new Date(2018,0,1,8,0),
-      endDateTime: new Date(2018,0,1,17,0), duration: 8, other: "Automatic Holiday"}
-  ];
+  var entries = ParseEntries(document.getElementById("EntryText").value);
   DrawPlanner(entries);
 }
