@@ -28,9 +28,10 @@ ParseEntries.js has several functions that need to be defined.
 
 My sample data assumes that the time keeping system does not create a separate 'Lunch' entry. That is why some of the entry durations are shorter than the difference between the start and end times. The sample data assumes a one hour lunch from 12:00 to 13:00.
 
-The duration field is included because it is needed to match with the processed entries, which do not have end times given.
+The duration field is included because it is needed to match with the processed entries, which do not have end times given in my sample data.
 
 # Limitations
 
 * This application does not currently handle entries that span midnight.
 * This application assumes that multiple entries may contribute to one processed entry, but multiple processed entries may not be created from one entry.
+* This application assumes that any processed entries will be no more than one year in the future and no more than a handful of years in the past. (This means my sample data will need to be updated every few years to prevent odd errors.)
