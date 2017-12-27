@@ -1,28 +1,35 @@
-.RG {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #66bb99;} /* Normal Time Worked */
-.LA {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ccffcc;} /* Annual Leave */
-.SL {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ffff99;} /* Sick Leave */
-.CD {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ccffff;} /* Credit Hours Earned */
-.CN {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #99ccff;} /* Credit Hours Used */
-.CE {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #00ccff;} /* Comp Hours Earned */
-.CT {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #0066cc; color: white;} /* Comp Hours Used */
-.CB {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ccccff;} /* Travel Comp Hours Earned */
-.CF {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #cc99ff;} /* Travel Comp Hours Used */
-.OT {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ff7c80;} /* Overtime Worked */
-.CB {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #00bb50;} /* Award Leave */
-.LN {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #ff6600;} /* Administrative Leave */
-.LH {border: 2px solid rgba(0,0,0,0.5); z-index: 1; background-color: #444444; color: white;} /* Holiday Leave */
+.RG {background-color: #66bb99;} /* Normal Time Worked */
+.LA {background-color: #ccffcc;} /* Annual Leave */
+.SL {background-color: #ffff99;} /* Sick Leave */
+.CD {background-color: #ccffff;} /* Credit Hours Earned */
+.CN {background-color: #99ccff;} /* Credit Hours Used */
+.CE {background-color: #00ccff;} /* Comp Hours Earned */
+.CT {background-color: #0050b0; color: white;} /* Comp Hours Used */
+.CB {background-color: #ccccff;} /* Travel Comp Hours Earned */
+.CF {background-color: #cc99ff;} /* Travel Comp Hours Used */
+.OT {background-color: #ff7c80;} /* Overtime Worked */
+.CB {background-color: #00bb50;} /* Award Leave */
+.LN {background-color: #ff6600;} /* Administrative Leave */
+.LH {background-color: #444444; color: white;} /* Holiday Leave */
+
+.entry {
+  border: 2px solid rgba(0,0,0,0.5);
+  z-index: 1;
+  border-radius: 5px;
+}
 
 .entryDiff, .processedDiff {
-  border: 2px solid rgba(255,0,0,0.75);
-  background-color: rgba(255,0,0,0.6);
+  border: 2px solid rgba(128,0,0,0.75);
+  background-color: rgba(180,0,0,0.6);
   z-index: 2;
-  width: 10%;
+  width: 5%;
   color: rgba(0,0,0,0);
+  border-radius: 5px;
 }
 .entryDiff:hover, .processedDiff:hover {
-  width: 90%;
-  background-color: rgba(255,0,0,0.8);
-  color: rgba(0,0,0,1);
+  width: 95%;
+  background-color: rgba(180,0,0,0.8);
+  color: rgba(255,255,255,1);
 }
 .processedDiff {
   justify-self: right;
@@ -37,7 +44,7 @@ div:hover > span.tooltip {
 
 #Planner {
   width:100%;
-  font-size: 16px;
+  font-size: medium;
 }
 .week {
   width:100%;
@@ -53,7 +60,7 @@ div:hover > span.tooltip {
 }
 .week > * {
   text-align: center;
-  min-height: 7px;
+  min-height: 0.5em;
 }
 .week > div {
   overflow-y: auto;
@@ -75,7 +82,7 @@ div:hover > span.tooltip {
   border-left: 1px solid gray;
   border-right: 1px solid gray;
   grid-row: 1/2;
-  font-size: 20px;
+  font-size: larger;
   font-weight: bold;
 }
 .timeLabel {
@@ -108,8 +115,9 @@ textarea {
 }
 
 button {
-  font-size: 12pt;
+  font-size: larger;
   clear: both;
+  border-radius: 5px;
 }
 
 #DrawButton {

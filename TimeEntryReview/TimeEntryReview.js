@@ -121,7 +121,7 @@ function GetEntryDescription(entry) {
 function DrawEntries(entries, startTime) {
   var str = "";
   for( var e in entries ) {
-    str += "<div class='" + entries[e].entryType + "' " + GetEntryColRowStr(entries[e],startTime) +
+    str += "<div class='entry " + entries[e].entryType + "' " + GetEntryColRowStr(entries[e],startTime) +
       ">" + GetEntryDescription(entries[e]) + "</div>";
   }
   return str;

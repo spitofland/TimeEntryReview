@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Time Entry Review</title>
@@ -10,8 +10,9 @@
 </head>
 
 <body onload="ParseEntryTables()">
+<h1>Time Entry Review</h1>
 <div id="EntryTextDiv">
-<label>List of Entries</label>
+<label for="EntryText">List of Entries</label>
 <textarea id="EntryText" autofocus placeholder="Paste Time Entry Listing Here...">
 LH Dec 25, 2017 08:00 Dec 25, 2017 17:00 8.00 Automatic Holiday
 CD Dec 26, 2017 07:15 Dec 26, 2017 08:00 0.75 Project Rivendale
@@ -26,7 +27,7 @@ RG Jan 02, 2018 13:30 Jan 02, 2018 14:00 0.50 Project Camino
 </textarea>
 </div>
 <div id="ProcessedEntryTextDiv" class="hidden">
-<label>List of Processed Entries</label>
+<label for="ProcessedEntryText">List of Processed Entries</label>
 <textarea id="ProcessedEntryText" placeholder="Paste Processed Time Entry Listing Here...">
 12/25  MON  00000  0  0800  LH  0800  0000  0000  0000  0000
 12/26  TUE  00000  0  0725  CD  0000  0000  0000  0000  0075
