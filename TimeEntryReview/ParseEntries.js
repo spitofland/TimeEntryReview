@@ -38,25 +38,66 @@ function ParseEntry( line ) {
     endDateTime: new Date(Date.parse(match[4])), duration: match[6], other: match[7]};
 }
 
+// This is unfortunately English specific
+function GetWeekDayFromStr(dayOfWeekStr) {
+  var weekDay = 0;
+  var upperStr = dayOfWeekStr.toUpperCase();
+  if( upperStr[0] == 'S' ) {
+    if( upperStr[1] == 'U' ) {
+      weekDay = 0;
+    }
+    else {
+      weekDay = 6;
+    }
+  }
+  else if( upperStr[0] == 'M' ) {
+    weekDay = 1;
+  }
+  else if( upperStr[0] == 'T' ) {
+    if( upperStr[1] == 'U' ) {
+      weekDay = 2;
+    }
+    else {
+      weekDay = 4;
+    }
+  }
+  else if( upperStr[0] == 'W' ) {
+    weekDay = 3;
+  }
+  else {
+    weekDay = 5;
+  }
+  return weekDay;
+}
+
+// Processed Entries don't list the year, so try to figure it out
+function DetermineCorrectDate(startingDate, dayOfWeek) {
+  var weekDay = GetWeekDayFromStr(dayOfWeek);
+  var date = new Date(startingDate);
+  while( date.getDay() != weekDay ) {
+    date.setFullYear(date.getFullYear()-1);
+  }
+  return date;
+}
+
 function ParseProcessedEntry( line ) {
   //Match Something Like: "10/17  TUE  00000  0  1375  RG  0200  0000  0000  0000  0000"
   //                  Or: "10/18  WED  00000  0  1500  CD  0000  0000  0000  0000  0100"
   //                      |   Date   |          |Time|Type|         Duration           |
-  var regEx = /0?(\d+)\/(\d+)\s+\w+\s+\w+\s+\w+\s+(\d+)(\d\d)\s+(\w+)[^1-9]+([1-9]\d*)(\D|$)/;
+  var regEx = /0?(\d+)\/(\d+)\s+(\w+)\s+\w+\s+\w+\s+(\d+)(\d\d)\s+(\w+)[^1-9]+([1-9]\d*)(\D|$)/;
   var match = regEx.exec(line);
   if( match == undefined ) {
     return undefined;
   }
 
+  // Use weekday string to match year
   var now = new Date();
-  var entryYear = now.getFullYear();
-  if( match[1] > now.getMonth()+1 ) {
-    entryYear -= 1;
-  }
-  var dateTimeStr = match[1]+"\/"+match[2]+"\/"+entryYear + " " + match[3]+":"+(match[4]*0.6);
+  var entryYear = now.getFullYear()+1;
+  var dateStr = match[1]+"\/"+match[2]+"\/"+entryYear+" "+match[4]+":"+(match[5]*0.6);
+  var startDateTime = DetermineCorrectDate(Date.parse(dateStr), match[3]);
 
-  return {entryType: match[5], startDateTime: new Date(Date.parse(dateTimeStr)),
-    endDateTime: undefined, duration: (match[6]/100), other: ""};
+  return {entryType: match[6], startDateTime: startDateTime, endDateTime: undefined,
+    duration: (match[7]/100), other: ""};
 }
 
 function CompareEntryLists( entries, processedEntries ) {

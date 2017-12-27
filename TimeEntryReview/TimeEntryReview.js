@@ -112,9 +112,10 @@ function GetEntryColRowStr(entry, startTime) {
 }
 
 function GetEntryDescription(entry) {
-  return entry.entryType + " : " + entry.duration + " Hr" + (entry.duration > 1 ? "s" : "") +
-    "<br/>" + ShortTimeFormat(entry.startDateTime) + " - " + ShortTimeFormat(entry.endDateTime) +
-    "<br/>" + entry.other;
+  return entry.entryType + " : " + ShortTimeFormat(entry.startDateTime) + " - " +
+    ShortTimeFormat(entry.endDateTime) + " : " + entry.duration +
+    " Hr" + (entry.duration > 1 ? "s" : "") + "<span class='tooltip'><br/>" +
+    entry.other + "</span>";
 }
 
 function DrawEntries(entries, startTime) {
@@ -130,11 +131,12 @@ function DrawDifferences(differences, startTime) {
   var str = "";
   for( var e of differences.entries ) {
     str += "<div class='entryDiff' " + GetEntryColRowStr(e,startTime) +
-      ">Unmatched Entry<br/>" + GetEntryDescription(e) + "</div>";
+      "><span class='tooltip'>Unmatched Entry<br/>" + GetEntryDescription(e) + "</span></div>";
   }
   for( var p of differences.processedEntries ) {
     str += "<div class='processedDiff' " + GetEntryColRowStr(p,startTime) +
-      ">Unmatched Processed Entry<br/>" + GetEntryDescription(p) + "</div>";
+      "><span class='tooltip'>Unmatched Processed Entry<br/>" + GetEntryDescription(p) +
+      "</span></div>";
   }
   return str;
 }

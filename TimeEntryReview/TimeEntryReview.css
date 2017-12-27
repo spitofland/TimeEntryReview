@@ -14,18 +14,25 @@
 
 .entryDiff, .processedDiff {
   border: 2px solid rgba(255,0,0,0.75);
-  background-color: rgba(255,0,0,0.5);
+  background-color: rgba(255,0,0,0.6);
   z-index: 2;
   width: 10%;
   color: rgba(0,0,0,0);
 }
 .entryDiff:hover, .processedDiff:hover {
   width: 90%;
-  background-color: rgba(255,0,0,1);
+  background-color: rgba(255,0,0,0.8);
   color: rgba(0,0,0,1);
 }
 .processedDiff {
   justify-self: right;
+}
+
+div > span.tooltip {
+  display: none;
+}
+div:hover > span.tooltip {
+  display: inline;
 }
 
 #Planner {
@@ -47,6 +54,10 @@
 .week > * {
   text-align: center;
   min-height: 7px;
+}
+.week > div {
+  overflow-y: auto;
+  text-overflow: ellipsis;
 }
 .week > div.empty {
   border: 1px solid gray;
