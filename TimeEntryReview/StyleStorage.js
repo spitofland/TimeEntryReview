@@ -16,23 +16,31 @@ var defaultStyles = [
 
 function StoreStyles( styles ) {
   if( typeof(Storage) !== "undefined" ) {
-    localStorage.timeEntryStyles = "";
+    var timeEntryStyles = "";
     for( var s in styles ) {
-      localStorage.timeEntryStyles += StyleEntryToString(styles[s]);
+      timeEntryStyles += StyleEntryToString(styles[s]);
     }
+    try {
+      localStorage.setItem('timeEntryStyles', timeEntryStyles);
+    }
+    catch (err) {}  // Fail silently
   }
 }
 
 function ReadStylesFromStorage() {
   var styles = [];
   if( typeof(Storage) !== "undefined" ) {
-    if( localStorage.timeEntryStyles ) {
-      var styleStrs = localStorage.timeEntryStyles.match(/\.\w+\s+\{[^}]*\}/g);
-      for( var s in styleStrs ) {
-        var style = styleStrs[s].match(/\.(\w+)\s+\{([^}]*)\}/);
-        styles.push({type: style[1], style: style[2]});
+    try {
+      var timeEntryStyles = localStorage.getItem( 'timeEntryStyles' );
+      if( timeEntryStyles != undefined ) {
+        var styleStrs = timeEntryStyles.match(/\.\w+\s+\{[^}]*\}/g);
+        for( var s in styleStrs ) {
+          var style = styleStrs[s].match(/\.(\w+)\s+\{([^}]*)\}/);
+          styles.push({type: style[1], style: style[2]});
+        }
       }
     }
+    catch (err) {}  // Fail silently
   }
   return styles;
 }
@@ -44,10 +52,13 @@ function StyleEntryToString( style ) {
 function OutputStylesForHeader() {
   var styles = defaultStyles;
   if( typeof(Storage) !== "undefined" ) {
-    if( !localStorage.timeEntryStyles ) {
-      StoreStyles(styles);
+    try {
+      if( localStorage.getItem( 'timeEntryStyles' ) == undefined ) {
+        StoreStyles(styles);
+      }
+      styles = ReadStylesFromStorage();
     }
-    styles = ReadStylesFromStorage();
+    catch (err) {}  // Fail silently
   }
 
   var styleStr = "<style>";
