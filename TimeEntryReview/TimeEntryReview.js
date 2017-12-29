@@ -129,16 +129,31 @@ function DrawEntries(entries, startTime) {
 
 function DrawDifferences(differences, startTime) {
   var str = "";
-  for( var e of differences.entries ) {
-    str += "<div class='entryDiff' " + GetEntryColRowStr(e,startTime) +
-      "><span class='tooltip'>Unmatched Entry<br/>" + GetEntryDescription(e) + "</span></div>";
-  }
-  for( var p of differences.processedEntries ) {
-    str += "<div class='processedDiff' " + GetEntryColRowStr(p,startTime) +
-      "><span class='tooltip'>Unmatched Processed Entry<br/>" + GetEntryDescription(p) +
+  for( var e in differences.entries ) {
+    str += "<div class='entryDiff' " + GetEntryColRowStr(differences.entries[e],startTime) +
+      "><span class='tooltip'>Unmatched Entry<br/>" + GetEntryDescription(differences.entries[e]) +
       "</span></div>";
   }
+  for( var p in differences.processedEntries ) {
+    str += "<div class='processedDiff' " +
+      GetEntryColRowStr(differences.processedEntries[p],startTime) +
+      "><span class='tooltip'>Unmatched Processed Entry<br/>" +
+      GetEntryDescription(differences.processedEntries[p]) + "</span></div>";
+  }
   return str;
+}
+
+function BrowserHasGridSupport() {
+  var hasSupport = true;
+  try {
+    if( !CSS.supports('display','grid') ) {
+      throw "No Grid Support";
+    }
+  }
+  catch(err) {
+    hasSupport = false;
+  }
+  return hasSupport;
 }
 
 function DrawWeek(entries,differences) {
@@ -150,10 +165,13 @@ function DrawWeek(entries,differences) {
     numSlices += 96;
   }
 
-  str += FillGridWithEmptyCells(numSlices); // This must come first for grid lines to work correctly
-  str += DrawTimeList(startTime,numSlices);
-  str += DrawDayOfWeekLabels(entries[0]);
-  str += DrawEntries(entries,startTime);
+  if( BrowserHasGridSupport() ) {
+    str += FillGridWithEmptyCells(numSlices); // This must come first for grid lines to work correctly
+    str += DrawTimeList(startTime,numSlices);
+    str += DrawDayOfWeekLabels(entries[0]);
+    str += DrawEntries(entries,startTime);
+  }
+
   str += DrawDifferences(differences,startTime);
 
   str += "</div>";
@@ -173,14 +191,21 @@ function GetEntriesForWeek(entries,weekDate) {
 }
 
 function DrawPlanner(entries,differences) {
-  document.getElementById("Planner").innerHTML = "";
-  entries.sort( function (entry1,entry2) { return entry1.startDateTime - entry2.startDateTime; });
-  var startDate = RoundDownToDate(entries[0].startDateTime);
+  var planner = document.getElementById("Planner");
+  planner.innerHTML = "";
+
+  if( !BrowserHasGridSupport() &&
+        differences.entries.length == 0 && differences.processedEntries.length == 0 ) {
+    planner.innerHTML += "<div class='error'>Cannot Display Correctly in this Browser<br/>" +
+      "Must have support for CSS Grid<br/><br/>" +
+      "Comparison with Processed Entries May Still Function</div>";
+    return;
+  }
+
   var endDate = RoundDownToDate(entries[entries.length-1].startDateTime);
-  var date = new Date(startDate);
+  var date = RoundDownToDate(entries[0].startDateTime);
   date.setDate(date.getDate()-date.getDay());
-  var weekEnd = new Date(date);
-  weekEnd.setDate(weekEnd.getDate()+7);
+  var weekEnd = AddTime( date, 24*7, 0 );
 
   for( ; date < endDate; date.setDate(date.getDate()+7), weekEnd.setDate(weekEnd.getDate()+7) ) {
     var IsInWeek = function (entry) {
@@ -188,15 +213,23 @@ function DrawPlanner(entries,differences) {
     };
     var weekDiff = {entries: differences.entries.filter(IsInWeek),
       processedEntries: differences.processedEntries.filter(IsInWeek)};
+
+    planner.innerHTML += "<h2>" + date.toDateString() + " - " + AddTime(date,6*24,0).toDateString() + "</h2>";
     DrawWeek( entries.filter(IsInWeek), weekDiff );
   }
 }
 
+function StartTimeDiff( entry1, entry2 ) {
+  return entry1.startDateTime - entry2.startDateTime;
+}
+
 function ParseEntryTables() {
   var entries = ParseEntries(document.getElementById("EntryText").value);
+  entries.sort( StartTimeDiff );
   var differences = {entries: [], processedEntries: []};
   if( !document.getElementById("ProcessedEntryTextDiv").classList.contains("hidden") ) {
     var procEntries = ParseProcessedEntries(document.getElementById("ProcessedEntryText").value);
+    procEntries.sort( StartTimeDiff );
     differences = CompareEntryLists(entries,procEntries);
   }
   DrawPlanner(entries,differences);

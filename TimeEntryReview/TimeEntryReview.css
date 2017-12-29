@@ -20,24 +20,15 @@
 
 .entryDiff, .processedDiff {
   border: 2px solid rgba(128,0,0,0.75);
-  background-color: rgba(180,0,0,0.6);
+  background-color: rgba(180,0,0,1);
   z-index: 2;
-  width: 5%;
-  color: rgba(0,0,0,0);
-  border-radius: 5px;
-}
-.entryDiff:hover, .processedDiff:hover {
-  width: 95%;
-  background-color: rgba(180,0,0,0.8);
   color: rgba(255,255,255,1);
+  border-radius: 5px;
 }
 .processedDiff {
   justify-self: right;
 }
 
-div > span.tooltip {
-  display: none;
-}
 div:hover > span.tooltip {
   display: inline;
 }
@@ -52,10 +43,6 @@ div:hover > span.tooltip {
   grid-template-columns: 1fr repeat( 7, 2fr );
   grid-auto-flow: column;
   grid-column-gap: 0px;
-  border-left: 1px solid gray;
-  border-right: 1px solid gray;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
   margin-top: 20px;
 }
 .week > * {
@@ -126,6 +113,44 @@ button {
 
 label {
   margin-left: 5px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+body {
+  padding-bottom: 20px;
+}
+
+.error {
+  color: #880000;
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px;
+}
+
+@supports (display: grid) {
+  .entryDiff, .processedDiff {
+    background-color: rgba(180,0,0,0.6);
+    width: 5%;
+  }
+  .entryDiff:hover, .processedDiff:hover {
+    width: 95%;
+    background-color: rgba(180,0,0,0.8);
+  }
+
+  div > span.tooltip {
+    display: none;
+  }
+
+  .week {
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+  }
 }
 
 @media screen and (min-width: 1000px) {
