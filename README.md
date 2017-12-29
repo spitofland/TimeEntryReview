@@ -16,6 +16,8 @@ If your time entry system uses different billing codes (RG, LA, etc), you can si
 
 If your time entry system produces a text dump in a different format (likely), you will need to change the functions in ParseEntries.js to extract and compare the information correctly.
 
+A live demo can be found here: https://spitofland.github.io/TimeEntryReview/TimeEntryReview/TimeEntryReview.html
+
 # The Parse Functions
 
 ParseEntries.js has several functions that need to be defined.
